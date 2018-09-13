@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>reCAPTCHA</title>
+    <script type="text/javascript">
+        var recaptcha_response = '';
+
+        var onloadCallback = function () {
+            grecaptcha.render('reCaptcha', {
+                'sitekey': '',
+                'callback': onVerify
+            });
+        };
+
+        var onVerify = function (response) {
+            if (response !== undefined) {
+                recaptcha_response = response;
+            } else {
+                console.log('no recaptcha');
+            }
+            window.postMessage(recaptcha_response);
+        }
+    </script>
+</head>
+
+<body>
+
+    <div id="reCaptcha"></div>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+
+</body>
+
+</html>
